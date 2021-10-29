@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <input type="button" id='start' value='Start'>
+        <h1>Math Madness!</h1>
+        <input type="button" id='stop' value='Stop'>
+    </header>
+    <main>
+        <div>
+            <p>Timer: </p>
+            <span id='main_timer'></span>
+        </div>
+        <div id='container'>
+            <h2>Multiplication</h2>
+            <span id='factor1'></span><br>
+            <div id='operator'>
+                <span>x</span>
+                <span id='factor2'></span><br>
+            </div>
+            <input type="text" id='response'><br>
+            <input type="button" value='Enter' id='enter'>
+            <span id='problem_timer'></span>
+            <span id='message'></span>
+        </div>
+        <div>
+            <p>Score: </p>
+            <span id='score'></span>
+        </div>
+    </main>
+    <footer>
+        <p>&copy;Bear Productions</p>
+        <p id='email'>a.barragan@gmail.com</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

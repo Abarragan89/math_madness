@@ -1,0 +1,127 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: minmax(100px auto);
+    margin: 20px;
+    border: 1px solid black;
+    padding-bottom: 1em;
+}
+/* styles for the header */
+header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column: 1 / 4;
+    grid-row: 1;
+    border-bottom: 1px solid black;
+}
+
+header>h1 {
+    display: inline;
+    text-align: center;
+    font-size: 300%;
+    align-self: start;
+}
+
+header>input {
+    font-size: 200%;
+    border-radius: 20px;
+    width: 100px;
+    height: 60px;
+}
+
+#start, #stop {
+    align-self: center;
+    justify-self: center;
+}
+
+/* styles for the main content */
+main {
+    display:grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    justify-items: center;
+}
+h2 {
+    font-size: 250%;
+    border-bottom: 1px solid black;
+}
+#factor1 {
+    display: block;
+    text-align: right;
+    font-size: 600%;
+}
+#operator {
+    display: block;
+    text-align: right;
+    font-size: 600%;
+    border-bottom: 3px solid black;
+}
+#factor1 {
+    padding-bottom: .3em;
+    text-align: right;
+}
+
+#timer, #score {
+    font-size: 200%;
+    
+}
+#container {
+    justify-content: center;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding-left: 10em;
+    padding-right: 10em;
+}
+#response {
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px;
+    padding-bottom: .2em;
+    font-size: 250%;
+    width: 2em;
+    margin-bottom: .5em;
+    margin-top: .5em;
+}
+
+#enter {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    padding: 1em;
+    border-radius: 20px;
+    font-size: 100%;
+}
+p {
+    font-size: 150%;
+}
+
+#main_timer, #problem_timer {
+    display: block;
+    text-align: center;
+    font-size: 350%;
+}
+
+
+
+
+/* styles for the footer */
+footer {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+    padding-top: 1em;
+    border-top: 1px solid black;
+}
+
+footer>p {
+    display: inline;
+    font-size: 1.25em;
+    margin-left: 2em;
+}
+
+#email {
+    float: right;
+    margin: 0;
+    padding: 0;
+    margin-right: 2em;
+}
