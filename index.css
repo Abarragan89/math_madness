@@ -16,6 +16,7 @@ header {
 }
 
 header>h1 {
+    font-family: 'Fruktur', cursive;
     display: inline;
     text-align: center;
     font-size: 300%;
@@ -29,7 +30,7 @@ header>input {
     height: 60px;
 }
 
-#start, #stop {
+#start, #reset {
     align-self: center;
     justify-self: center;
 }
@@ -37,14 +38,15 @@ header>input {
 /* styles for the main content */
 main {
     display:grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 1fr 1.2fr 1fr;
     grid-column: 1 / 4;
     grid-row: 2 / 3;
     justify-items: center;
 }
 h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 250%;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
 }
 #factor1 {
     display: block;
@@ -58,23 +60,31 @@ h2 {
     border-bottom: 3px solid black;
 }
 #factor1 {
-    padding-bottom: .3em;
     text-align: right;
 }
 
-#timer, #score {
-    font-size: 200%;
-    
+#main_timer, #score {
+    display: block;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 300%;
+}
+
+#problem_timer {
+    display: block;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 500%;
 }
 #container {
     justify-content: center;
     border-left: 1px solid black;
     border-right: 1px solid black;
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 5em;
+    padding-right: 5em;
 }
 #response {
-    display: block;
+    display: inline;
     margin: 0 auto;
     border-radius: 15px;
     padding-bottom: .2em;
@@ -84,25 +94,51 @@ h2 {
     margin-top: .5em;
 }
 
-#enter {
+#reset_highscore {
+    width: auto;
     display: block;
     margin: 0 auto;
     margin-bottom: 2em;
     padding: 1em;
     border-radius: 20px;
+    font-size: 80%;
+}
+
+#enter{
+    display: inline-block;
+    margin-left: 30%;
+    margin-bottom: 2em;
+    padding: 1em;
+    border-radius: 20px;
     font-size: 100%;
 }
-p {
-    font-size: 150%;
-}
 
-#main_timer, #problem_timer {
-    display: block;
+main p {
+    margin: 0 auto;
     text-align: center;
-    font-size: 350%;
+}
+p {
+    font-family: 'Irish Grover', cursive; ;
+    font-size: 300%;
+    font-weight: bold;
 }
 
+/* Styles for the message */
 
+.incorrect {
+    display: block;
+    font-size: 200%;
+    color: red;
+    margin: .3em auto;
+    text-align: center;
+}
+.correct {
+    display: block;
+    font-size: 200%;
+    color:green;
+    margin: .3em auto;
+    text-align: center;
+}
 
 
 /* styles for the footer */

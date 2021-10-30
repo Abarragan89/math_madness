@@ -6,13 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fruktur&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
     <header>
         <input type="button" id='start' value='Start'>
         <h1>Math Madness!</h1>
-        <input type="button" id='stop' value='Stop'>
+        <input type="button" id='reset' value='Reset'>
     </header>
     <main>
         <div>
@@ -26,15 +38,20 @@
                 <span>x</span>
                 <span id='factor2'></span><br>
             </div>
-            <input type="text" id='response'><br>
-            <input type="button" value='Enter' id='enter'>
+            <div>
+                <input type="button" value='Enter' id='enter'>
+                <input type="text" id='response'>
+            </div>
             <span id='problem_timer'></span>
             <span id='message'></span>
         </div>
         <div>
             <p>Score: </p>
             <span id='score'></span>
+            <p id='highscore'></p>
+            <input type="button" id='reset_highscore' value="Reset Highscore">
         </div>
+      
     </main>
     <footer>
         <p>&copy;Bear Productions</p>
