@@ -1,20 +1,37 @@
 $(document).ready(function() {
+    //set timers and score
+    $('#main_timer').text('60');
+    $('#problem_timer').text('100');
+    $('#score').text('0');
+    $('#factor1').text("Let's");
+    $('#factor2').text("GO!");
+    $('#message').addClass('correct');
+    $('#message').text("Good Luck!");
+
+    $('#response').prop('disabled', 'true');
+    $('#enter').prop('disabled', 'true');
     //Set score to 0
     let score = 0;
 
     //Get high score and display
-    if(!localStorage.getItem('highscore')) {
-        $('#highscore').text('High Score: ');
-
+    if (localStorage.getItem('highscore') === null){
+        $('#highscore').text('0');
+        $('#player').text('Name');
     } else {
         let highscore = localStorage.getItem('highscore');
-        let highscorer = localStorage.getItem('name')
-        $('#highscore').text(highscorer + " " + highscore)
+        let player = localStorage.getItem('player');
+        $('#highscore').text(highscore);
+        $('#player').text(player);
     }
+
+        
 
     //Start the game with new numbers
     function gameStart() {
         //Create random numbers and display them in span
+        $('#enter').prop('disabled', false);
+        $('#response').prop('disabled', false);
+
         let random1 = Math.floor(Math.random() * 12) + 1;
         let random2 = Math.floor(Math.random() * 12) + 1;
         $('#factor1').text(random1);
@@ -39,7 +56,7 @@ $(document).ready(function() {
         if (isNaN(response)) {
             $('#message').removeClass('correct')
             $('#message').addClass('incorrect')
-            $('#message').text('You need to put a number.');
+            $('#message').text('Incorrect');
             $('#response').val("");
 
         } else if (answer != response) {
@@ -60,7 +77,7 @@ $(document).ready(function() {
             multiplier = parseInt(multiplier);
 
             //Multiply multiplier by 10
-            let points = 10 * multiplier;
+            let points = 5 * multiplier;
 
             //add points to the score
             score += points;
@@ -73,75 +90,118 @@ $(document).ready(function() {
 
     //Set up a problem timer
     function problemTimer () {
-            let sec = 1000;
-            $('#problem_timer').text("10.0");
+            let sec = 100;
+            $('#problem_timer').text("100");
 
-            const proTimer = setInterval(function(){
-            if (sec < 0 || $('#problem_timer').text() == '0') {
+            const proTimer = setInterval(function() {
+            if ($('#problem_timer').text() == '0') {
                 clearInterval(proTimer);
                 gameStart();
-                problemTimer();
-
+                problemTimer();   
             //if main timer goes off
             } else if ($('#problem_timer').text() == 'Nice Try!') {
                 clearInterval(proTimer);
             } else { 
-            $('#problem_timer').text(sec);
             sec--;
+            $('#problem_timer').text(sec);
             }
-        }, 10)
+        }, 100)
     }   
+    //checks the status of the problem timer to change color accordingly. 
+    function problemTimerColor () {
+        setInterval(function() {
+            num = $('#problem_timer').text();
+            num = parseInt(num);
+            if (num > 61) {$('#problem_timer').css('color', 'white');}
+            if (num < 50) {$('#problem_timer').css('color', 'red');}
+            if (num == 0) {$('#problem_timer').css('color', 'white');}
+        }, 1)
+    }
 
     //Set up main timer
-    function mainTimer(){
-        let sec = 20;
-        $('#main_timer').text("60")
+    function mainTimer() {
+        let sec = 60;
         let timer = setInterval(function(){
-            $('#main_timer').text(sec);
             sec--;
-            if (sec < -1) {
+            $('#main_timer').text(sec);
+            //if the main timer reaches zero
+            if ($('#main_timer').text() <= -0.4 ) {
                 $('#main_timer').text("Time!")
+                $('#problem_timer').css('color', 'green')
                 $('#problem_timer').text('Nice Try!');
                 $('#message').text("");
                 $('#response').prop('disabled', 'true');
                 $('#start').prop('disabled', 'true');
                 $('#enter').prop('disabled', 'true');
+                //set High Score
+                setHighscore();
                 clearInterval(timer);
-
-                //set highscore
-                if(score > highscore) {
-                    score = highscore;
-                    let name = prompt("New highscore!! Enter your name")
-                    localStorage.setItem('highscore', score)
-                    localStorage.setItem('name', name)
-                }
+            } else if ($('#main_timer').text() == "Done") {
+                clearInterval(timer);
             }
         }, 1000);
+    }
+
+    //set highscore
+    function setHighscore() {
+        //check if there is a highscore. If not, set one
+        if (localStorage.getItem('highscore') === null) {
+            let name = prompt('New High Score!\nEnter your name.');
+            if (name === null) {name = 'anonymous'}
+            localStorage.setItem('highscore', score);
+            localStorage.setItem('player', name);
+            let newScore = localStorage.getItem('highscore');
+            let newPlayer = localStorage.getItem('player')
+            $('#highscore').text(newScore);
+            $('#player').text(newPlayer);
+            $('#message').text('Congratulations!')
+
+        //If there is a highscore, see if current is bigger
+        } else if (score > localStorage.getItem('highscore')) {
+            $('problem_timer').text('Congratulations!')
+            let name = prompt('New High Score!\nEnter your name.');
+            if (name === null) {name = 'anonymous'}
+            localStorage.setItem('highscore', score);
+            localStorage.setItem('player', name);
+            let newScore = localStorage.getItem('highscore');
+            let newPlayer = localStorage.getItem('player')
+            $('#highscore').text(newScore);
+            $('#player').text(newPlayer);
+            $('#message').text('Congratulations!')
+        } else {
+            $('#message').text('Try Again')
+        }
     }
 
     //Reset the buttons and score for a new game. 
     function reset() {
         score = 0;
         $('#start').prop('disabled', false);
-        $('#enter').prop('disabled', false);
-        $('#response').prop('disabled', false);
-        $('#score').text('');
+        $('#score').text('0');
+        $('#main_timer').text('60');
+        $('#problem_timer').text('Nice Try!')
     }
 
     //Reset highscore
     $('#reset_highscore').click(function () {
         localStorage.removeItem('highscore');
-        localStorage.removeItem('name');
+        localStorage.removeItem('player');
+        $('#highscore').text('0');
+        $('#player').text('Name');
+
     })
 
     //button event  event handlers
     $('#enter').click(checker);
+
     $('#start').click(gameStart);
     $('#start').click(problemTimer)
     $('#start').click(mainTimer);
+    $('#start').click(problemTimerColor)
+
     $('#reset').click(reset);
 
-    //Press enter to submit score
+    //Press enter to submit score in response
     $('#response').keyup(function(e) {
         if(e.keyCode == 13 || e.which == 13) {
             checker();

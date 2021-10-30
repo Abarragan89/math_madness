@@ -1,9 +1,12 @@
+
 body {
     display: grid;
+    background-image: linear-gradient( #7CB6DB 80%,  #DBDA67);
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: minmax(100px auto);
     margin: 20px;
-    border: 1px solid black;
+    border: 5px solid black;
+    border-radius: 10px;
     padding-bottom: 1em;
 }
 /* styles for the header */
@@ -12,7 +15,8 @@ header {
     grid-template-columns: repeat(3, 1fr);
     grid-column: 1 / 4;
     grid-row: 1;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
+    background: linear-gradient(0.75turn, #7CB6DB, #c3d4b5,  #7CB6DB);
 }
 
 header>h1 {
@@ -20,7 +24,6 @@ header>h1 {
     display: inline;
     text-align: center;
     font-size: 300%;
-    align-self: start;
 }
 
 header>input {
@@ -28,12 +31,29 @@ header>input {
     border-radius: 20px;
     width: 100px;
     height: 60px;
-}
-
-#start, #reset {
     align-self: center;
     justify-self: center;
+    background: green;
+    color: white;
+    border: 2px solid black;
+    box-shadow: 5px 5px 10px black;
+
 }
+#reset_highscore, #enter {
+    background: green;
+    color: white;
+    border: 2px solid black;
+    box-shadow: 5px 5px 10px black;
+}
+input:hover {
+    border: 2px solid rgb(216, 216, 12);
+}
+input:disabled {
+    background: gray;
+    color: black;
+    pointer-events: none;
+}
+
 
 /* styles for the main content */
 main {
@@ -46,12 +66,13 @@ main {
 h2 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 250%;
-    border-bottom: 3px solid black;
+    border-bottom: 2px solid black;
 }
 #factor1 {
     display: block;
     text-align: right;
     font-size: 600%;
+
 }
 #operator {
     display: block;
@@ -59,41 +80,49 @@ h2 {
     font-size: 600%;
     border-bottom: 3px solid black;
 }
-#factor1 {
-    text-align: right;
-}
 
-#main_timer, #score {
+#main_timer, #score, #highscore, #player{
+    color: white;
     display: block;
     text-align: center;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 500%;
+    padding-bottom:.5em;
+}
+
+#highscore, #player {
+    padding-bottom: 0;
     font-size: 300%;
+    color:white;
 }
 
 #problem_timer {
     display: block;
     text-align: center;
     font-family: 'Bebas Neue', cursive;
+    color:white;
     font-size: 500%;
 }
+
+
 #container {
     justify-content: center;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 2.5px solid black;
+    border-right: 2.5px solid black;
     padding-left: 5em;
     padding-right: 5em;
 }
 #response {
     display: inline;
-    margin: 0 auto;
+    margin-left: 60%;
     border-radius: 15px;
     padding-bottom: .2em;
     font-size: 250%;
     width: 2em;
-    margin-bottom: .5em;
     margin-top: .5em;
 }
 
+/* styles for the buttons */
 #reset_highscore {
     width: auto;
     display: block;
@@ -103,15 +132,14 @@ h2 {
     border-radius: 20px;
     font-size: 80%;
 }
-
 #enter{
     display: inline-block;
     margin-left: 30%;
-    margin-bottom: 2em;
     padding: 1em;
     border-radius: 20px;
     font-size: 100%;
 }
+
 
 main p {
     margin: 0 auto;
@@ -127,18 +155,22 @@ p {
 
 .incorrect {
     display: block;
-    font-size: 200%;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 300%;
     color: red;
     margin: .3em auto;
     text-align: center;
 }
 .correct {
     display: block;
-    font-size: 200%;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 300%;
     color:green;
     margin: .3em auto;
     text-align: center;
 }
+
+
 
 
 /* styles for the footer */
@@ -146,7 +178,7 @@ footer {
     grid-column: 1 / 4;
     grid-row: 3 / 4;
     padding-top: 1em;
-    border-top: 1px solid black;
+    border-top: 3px solid black;
 }
 
 footer>p {
