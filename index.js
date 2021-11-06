@@ -85,7 +85,7 @@ $(document).ready(function() {
             $('#score').text(score);
 
             //Set the span to '0' to trigger a reset in the problem timer
-            $('#problem_timer').text("0");   
+            $('#problem_timer').text("00");   
         }
     }
 
@@ -98,10 +98,15 @@ $(document).ready(function() {
             if ($('#problem_timer').text() == '0') {
                 clearInterval(proTimer);
                 gameStart();
-                problemTimer();   
+                problemTimer();  
+                problemNoise(); 
             //if main timer goes off
             } else if ($('#problem_timer').text() == 'Nice Try!') {
                 clearInterval(proTimer);
+            }  else if ($('#problem_timer').text() == '00') {
+                clearInterval(proTimer);
+                gameStart();
+                problemTimer(); 
             } else { 
             sec--;
             $('#problem_timer').text(sec);
@@ -122,15 +127,14 @@ $(document).ready(function() {
     //Set up main timer
     function mainTimer() {
         let sec = 30;
+        $('#main_timer').text("30")
         let timer = setInterval(function(){
-            sec--;
-            $('#main_timer').text(sec);
             //if the main timer is 10 seconds
             if ($('#main_timer').text() == 10) {
                 tenSecondNoise();
             }
             //if the main timer reaches zero
-            if ($('#main_timer').text() <= -0.4 ) {
+            if ($('#main_timer').text() == '0' ) {
                 $('#main_timer').text("Time!")
                 $('#problem_timer').css('color', 'green')
                 $('#problem_timer').text('Nice Try!');
@@ -141,8 +145,11 @@ $(document).ready(function() {
                 //set High Score
                 setHighscore();
                 clearInterval(timer);
-            } else if ($('#main_timer').text() == "Done") {
+            } else if ($('#main_timer').text() === "Done") {
                 clearInterval(timer);
+            } else {
+                sec--;
+                $('#main_timer').text(sec);
             }
         }, 1000);
     }
@@ -176,6 +183,7 @@ $(document).ready(function() {
             $('#player').text(newPlayer);
             $('#message').text('Congratulations!')
         } else {
+            gameOverNoise();
             $('#message').text('Try Again')
         }
     }
@@ -186,7 +194,7 @@ $(document).ready(function() {
         score = 0;
         $('#start').prop('disabled', false);
         $('#score').text('0');
-        $('#main_timer').text('30');
+        $('#main_timer').text('Done');
         $('#problem_timer').text('Nice Try!')
     }
 
@@ -213,9 +221,14 @@ $(document).ready(function() {
     }
     //theme music
     function themeNoise() {
-        O('theme').volume = 0.3;
+        O('theme').volume = 0.2;
         O('theme').play();
     }
+    function resetTheme() {
+        O('theme').pause();
+        O('theme').currentTime = 0;
+    }
+
     function incorrect() {
         if (O('incorrect').play()) {
             O('incorrect').pause();
@@ -232,6 +245,10 @@ $(document).ready(function() {
         O('ten_second').play();
     }
 
+    function problemNoise() {
+        O('prob_exp').play();
+    }
+
     //button event  event handlers
     $('#enter').click(checker);
 
@@ -242,6 +259,7 @@ $(document).ready(function() {
     $('#start').click(problemTimerColor)
 
     $('#reset').click(reset);
+    $('#reset').click(resetTheme);
 
     //Press enter to submit score in response
     $('#response').keyup(function(e) {
