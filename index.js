@@ -1,6 +1,6 @@
 $(document).ready(function() {
     //set timers and score
-    $('#main_timer').text('60');
+    $('#main_timer').text('30');
     $('#problem_timer').text('100');
     $('#score').text('0');
     $('#factor1').text("Let's");
@@ -23,8 +23,6 @@ $(document).ready(function() {
         $('#highscore').text(highscore);
         $('#player').text(player);
     }
-
-        
 
     //Start the game with new numbers
     function gameStart() {
@@ -54,12 +52,14 @@ $(document).ready(function() {
 
         //Compare the number and response
         if (isNaN(response)) {
+            incorrect();
             $('#message').removeClass('correct')
             $('#message').addClass('incorrect')
             $('#message').text('Incorrect');
             $('#response').val("");
 
         } else if (answer != response) {
+            incorrect();
             $('#message').removeClass('correct')
             $('#message').addClass('incorrect')
             $('#message').text('Incorrect');
@@ -67,6 +67,7 @@ $(document).ready(function() {
 
         //Correct Answer
         } else if (answer == response) {
+            correctNoise()
             $('#message').removeClass('incorrect')
             $('#message').addClass('correct')
             $('#message').attr('color', 'green');
@@ -120,10 +121,14 @@ $(document).ready(function() {
 
     //Set up main timer
     function mainTimer() {
-        let sec = 60;
+        let sec = 30;
         let timer = setInterval(function(){
             sec--;
             $('#main_timer').text(sec);
+            //if the main timer is 10 seconds
+            if ($('#main_timer').text() == 10) {
+                tenSecondNoise();
+            }
             //if the main timer reaches zero
             if ($('#main_timer').text() <= -0.4 ) {
                 $('#main_timer').text("Time!")
@@ -146,6 +151,7 @@ $(document).ready(function() {
     function setHighscore() {
         //check if there is a highscore. If not, set one
         if (localStorage.getItem('highscore') === null) {
+            highscoreNoise();
             let name = prompt('New High Score!\nEnter your name.');
             if (name === null) {name = 'anonymous'}
             localStorage.setItem('highscore', score);
@@ -158,6 +164,7 @@ $(document).ready(function() {
 
         //If there is a highscore, see if current is bigger
         } else if (score > localStorage.getItem('highscore')) {
+            highscoreNoise();
             $('problem_timer').text('Congratulations!')
             let name = prompt('New High Score!\nEnter your name.');
             if (name === null) {name = 'anonymous'}
@@ -175,10 +182,11 @@ $(document).ready(function() {
 
     //Reset the buttons and score for a new game. 
     function reset() {
+        setHighscore()
         score = 0;
         $('#start').prop('disabled', false);
         $('#score').text('0');
-        $('#main_timer').text('60');
+        $('#main_timer').text('30');
         $('#problem_timer').text('Nice Try!')
     }
 
@@ -191,10 +199,44 @@ $(document).ready(function() {
 
     })
 
+    //correct sound function
+    function correctNoise() {
+        if (O('correct').play()) {
+            O('correct').pause();
+            O('correct').currentTime = 0;
+        }
+        O('correct').play();
+    }
+    //Game over noise
+    function gameOverNoise() {
+        O('game_over').play();
+    }
+    //theme music
+    function themeNoise() {
+        O('theme').volume = 0.3;
+        O('theme').play();
+    }
+    function incorrect() {
+        if (O('incorrect').play()) {
+            O('incorrect').pause();
+            O('incorrect').currentTime = 0;
+        }
+        O('incorrect').play()
+    }
+
+    function highscoreNoise() {
+        O('highscoreNoise').play()
+    }
+    
+    function tenSecondNoise() {
+        O('ten_second').play();
+    }
+
     //button event  event handlers
     $('#enter').click(checker);
 
     $('#start').click(gameStart);
+    $('#start').click(themeNoise);
     $('#start').click(problemTimer)
     $('#start').click(mainTimer);
     $('#start').click(problemTimerColor)
