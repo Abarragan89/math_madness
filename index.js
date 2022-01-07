@@ -159,34 +159,32 @@ $(document).ready(function() {
         //check if there is a highscore. If not, set one
         if (localStorage.getItem('highscore') === null) {
             highscoreNoise();
-            let name = prompt('New High Score!\nEnter your name.');
-            if (name === null) {name = 'anonymous'}
-            localStorage.setItem('highscore', score);
-            localStorage.setItem('player', name);
-            let newScore = localStorage.getItem('highscore');
-            let newPlayer = localStorage.getItem('player')
-            $('#highscore').text(newScore);
-            $('#player').text(newPlayer);
-            $('#message').text('Congratulations!')
+            setTimeout(newHighScore, 2500);
+
 
         //If there is a highscore, see if current is bigger
         } else if (score > localStorage.getItem('highscore')) {
             highscoreNoise();
-            $('problem_timer').text('Congratulations!')
-            let name = prompt('New High Score!\nEnter your name.');
-            if (name === null) {name = 'anonymous'}
-            localStorage.setItem('highscore', score);
-            localStorage.setItem('player', name);
-            let newScore = localStorage.getItem('highscore');
-            let newPlayer = localStorage.getItem('player')
-            $('#highscore').text(newScore);
-            $('#player').text(newPlayer);
-            $('#message').text('Congratulations!')
+            setTimeout(newHighScore, 2500);
+            
         } else {
             gameOverNoise();
             $('#message').text('Try Again')
         }
     }
+// newHighScore
+function newHighScore(){
+    $('problem_timer').text('Congratulations!');
+    let name = prompt('New High Score!\nEnter your name.');
+    if (name === null) {name = 'anonymous'};
+    localStorage.setItem('highscore', score);
+    localStorage.setItem('player', name);
+    let newScore = localStorage.getItem('highscore');
+    let newPlayer = localStorage.getItem('player')
+    $('#highscore').text(newScore);
+    $('#player').text(newPlayer);
+    $('#message').text('Congratulations!')
+}
 
     //Reset the buttons and score for a new game. 
     function reset() {
